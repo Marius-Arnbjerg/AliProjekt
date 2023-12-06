@@ -9,13 +9,17 @@ public class InGameUI : MonoBehaviour
 {
     public float playerHealth = 100;
     public float removeHealth = 1;
-    private float fullHealth = 100;
     public float countdownFloat = 60;
     //public float refillHealth = 25;
+    //private float fullHealth = 100;
+
+    public float enemyHealth = 100;
 
     public TMP_Text countdownNumberText;
     public TMP_Text countdownText;
     public TMP_Text healthNumberText;
+
+    public TMP_Text enemyHealthNumberText;
 
     /*
     public Slider playerOneFuelSlider, playerTwoFuelSlider; 
@@ -36,7 +40,7 @@ public class InGameUI : MonoBehaviour
 
     public void EmptyPlayerHealth()                                  
     {
-        Debug.Log("ded");
+        Debug.Log("player ded");
         //gameover                                  
     }
 
@@ -65,5 +69,18 @@ public class InGameUI : MonoBehaviour
         countdownText.gameObject.SetActive(false);
         countdownNumberText.gameObject.SetActive(false);
         countdownFloat = 60;
+    }
+    public void RemoveHealthEnemy()
+    {
+        enemyHealth = enemyHealth - removeHealth;
+        enemyHealthNumberText.text = enemyHealth.ToString("F0");
+
+        if (enemyHealth <= 0)
+            EmptyPlayerHealth();
+    }
+    public void EmptyEnemyHealth()
+    {
+        Debug.Log("enemy ded");
+        //game won
     }
 }
