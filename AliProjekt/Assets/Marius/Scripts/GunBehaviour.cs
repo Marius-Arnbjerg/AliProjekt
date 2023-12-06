@@ -56,7 +56,7 @@ public class GunBehaviour : MonoBehaviour
                 GetComponent<AudioSource>().PlayOneShot(ShootingAudio);
                 if (Physics.Raycast(bulletOrigin.transform.position, bulletOrigin.transform.forward, out hit, 300f, layers))
                 {
-                    //IGUI.RemoveHealthEnemy();
+                    IGUI.RemoveHealthEnemy();
                 }
                 bulletsLeft--;
 

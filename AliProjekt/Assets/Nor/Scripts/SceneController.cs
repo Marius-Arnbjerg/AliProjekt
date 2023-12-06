@@ -8,7 +8,7 @@ public class SceneController : MonoBehaviour
 
     public void StartButton()
     {
-        SceneManager.LoadScene("NyPlayer");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void ExitGame()

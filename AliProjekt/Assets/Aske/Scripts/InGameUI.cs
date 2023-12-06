@@ -38,6 +38,11 @@ public class InGameUI : MonoBehaviour
     public TMP_Text playerOneFuelText, playerTwoFuelText;
     */
 
+    private void Awake()
+    {
+        Time.timeScale = 1;
+    }
+
     public void PauseButtonPressed(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -136,21 +141,15 @@ public class InGameUI : MonoBehaviour
         enemyHealthNumberText.text = enemyHealth.ToString();
 
         if (enemyHealth <= 0)
-            EmptyPlayerHealth();
+            EmptyEnemyHealth();
     }
     public void EmptyEnemyHealth()
     {
-        Debug.Log("enemy ded");
-        //game won
+        WinMenu();
     }
     public void RemoveBullet()
     {
         bulletCount = bulletCount - removeHealth;
         bulletNumberText.text = bulletCount.ToString();
-
-        if (bulletCount <= 0)
-        {
-            //empty bullets
-        }
     }
 }
