@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class GunBehaviour : MonoBehaviour
 {
+    public AudioClip ShootingAudio;
+
     public InputActionProperty trigger;
     public GameObject gun;
 
@@ -51,6 +53,7 @@ public class GunBehaviour : MonoBehaviour
         {
             if (gunGrabbed == true && bulletsLeft > 0)
             {
+                GetComponent<AudioSource>().PlayOneShot(ShootingAudio);
                 if (Physics.Raycast(bulletOrigin.transform.position, bulletOrigin.transform.forward, out hit, 300f, layers))
                 {
                     //IGUI.RemoveHealthEnemy();

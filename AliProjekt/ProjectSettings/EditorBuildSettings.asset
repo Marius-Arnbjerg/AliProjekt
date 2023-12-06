@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Nor/Player.unity
     guid: 94be21cc87fad4f4a88b6b7e47a2b305
-  - enabled: 1
+  - enabled: 0
+    path: Assets/Marius/Scenes/Combined Scene 1.unity
+    guid: 0e18a8ff36fbc18449ea4dbca1274a10
+  - enabled: 0
     path: Assets/Nor/Menu.unity
     guid: d07031d69eceb4c369b4b00701cf9822
   - enabled: 1
