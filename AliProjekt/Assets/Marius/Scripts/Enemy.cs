@@ -14,12 +14,18 @@ public class Enemy : MonoBehaviour
 	public Transform bulletOrigin;
 	public ParticleSystem gunShot;
 
+	public LayerMask layers;
+	RaycastHit hit;
+
+	InGameUI IGUI;
 
 	// Use this for initialization
 	void Start()
 	{
 		nextFire = Time.time;
 		//gunShot.Stop();
+
+		IGUI = FindObjectOfType<InGameUI>();
 	}
 
 	// Update is called once per frame
@@ -36,11 +42,19 @@ public class Enemy : MonoBehaviour
 		{
 			//Instantiate(bullet, bulletOrigin.transform.position, bullet.transform.rotation);
 
-			GameObject tempBullet = Instantiate(bullet, bulletOrigin.transform.position, bulletOrigin.transform.rotation);
+			/*GameObject tempBullet = Instantiate(bullet, bulletOrigin.transform.position, bulletOrigin.transform.rotation);
 			gunShot.Play();
 			Rigidbody tempBulletRig = tempBullet.GetComponent<Rigidbody>();
 
-			tempBulletRig.AddForce(tempBulletRig.transform.forward * bulletSpeed);
+			tempBulletRig.AddForce(tempBulletRig.transform.forward * bulletSpeed);*/
+
+			if (Physics.Raycast(transform.position, transform.forward, out hit, 300f, layers))
+			{
+				IGUI.RemoveHealthPlayer();
+				Debug.Log("hit!");
+			}
+
+			gunShot.Play();
 
 			nextFire = Time.time + fireRate;
 
