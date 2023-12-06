@@ -1001,6 +1001,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftHand
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: fae1daafca75b4c64abd1bc7ff3c31c7,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a1b6f0682ac4c42359aa0e84d2ffdea6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2846,6 +2851,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightHand
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3d706141c9d934b6884f589c2385cc3d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2871,7 +2881,7 @@ Animator:
   m_GameObject: {fileID: 1194383844}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fae1daafca75b4c64abd1bc7ff3c31c7, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3adfcb6bf8b6d4e17b533c5b3b8faf02, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
