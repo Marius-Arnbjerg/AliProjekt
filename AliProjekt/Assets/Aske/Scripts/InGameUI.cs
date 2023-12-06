@@ -24,6 +24,9 @@ public class InGameUI : MonoBehaviour
 
     public TMP_Text enemyHealthNumberText;
 
+    public Text winHeaderText;
+    public GameObject winMenu;
+    public GameObject gameOverMenu;
     public GameObject pauseMenu;
     private bool pausedGame = false;
 
@@ -59,6 +62,24 @@ public class InGameUI : MonoBehaviour
         }
     }
 
+    public void GameOverMenu()
+    {
+        gameOverMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void WinMenu()
+    {
+        winHeaderText.text = "Level " + SceneManager.GetActiveScene().buildIndex.ToString() + " complete!";
+        winMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
+
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -80,8 +101,7 @@ public class InGameUI : MonoBehaviour
 
     public void EmptyPlayerHealth()                                  
     {
-        Debug.Log("player ded");
-        //gameover                                  
+        GameOverMenu();                        
     }
 
     public void Countdown()
