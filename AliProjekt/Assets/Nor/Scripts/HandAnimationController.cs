@@ -20,7 +20,7 @@ public class HandAnimationController : MonoBehaviour
     void Update()
     {
         float grabValue = grabAnimation.action.ReadValue<float>();
-        Debug.Log("Grab value" + grabValue);
+        //Debug.Log("Grab value" + grabValue);
 
         handAnimation.SetFloat("Grab", grabValue);
 
