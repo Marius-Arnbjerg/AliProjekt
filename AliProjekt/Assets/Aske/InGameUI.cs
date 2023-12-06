@@ -27,7 +27,7 @@ public class InGameUI : MonoBehaviour
 
     public void RemoveHealthPlayer()                             
     {
-        playerHealth = playerHealth - removeHealth * Time.deltaTime;
+        playerHealth = playerHealth - removeHealth;
         healthNumberText.text = playerHealth.ToString("F0");
 
         if (playerHealth <= 0)                                        
