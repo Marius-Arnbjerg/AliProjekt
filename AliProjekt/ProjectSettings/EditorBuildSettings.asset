@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Nor/Player.unity
     guid: 94be21cc87fad4f4a88b6b7e47a2b305
   - enabled: 1
+    path: Assets/Nor/Menu.unity
+    guid: d07031d69eceb4c369b4b00701cf9822
+  - enabled: 1
     path: Assets/Nor/NyPlayer.unity
     guid: a1dca9dee14eb4afbb77560b78d12074
   m_configObjects:
