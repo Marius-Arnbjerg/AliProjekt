@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	//[SerializeField]
-	//GameObject bullet;
-
-	
-	//public float bulletSpeed = 10;
-
-
 	public Transform bulletOrigin;
 	public ParticleSystem gunShot;
 	public Transform player;
@@ -26,7 +19,6 @@ public class Enemy : MonoBehaviour
 	void Start()
 	{
 		nextFire = Time.time;
-		//gunShot.Stop();
 
 		IGUI = FindObjectOfType<InGameUI>();
 	}
@@ -44,14 +36,6 @@ public class Enemy : MonoBehaviour
 	{
 		if (Time.time > nextFire)
 		{
-			//Instantiate(bullet, bulletOrigin.transform.position, bullet.transform.rotation);
-
-			/*GameObject tempBullet = Instantiate(bullet, bulletOrigin.transform.position, bulletOrigin.transform.rotation);
-			gunShot.Play();
-			Rigidbody tempBulletRig = tempBullet.GetComponent<Rigidbody>();
-
-			tempBulletRig.AddForce(tempBulletRig.transform.forward * bulletSpeed);*/
-
 			if (Physics.Raycast(bulletOrigin.transform.position, bulletOrigin.transform.forward, out hit, 300f, layers))
 			{
 				IGUI.RemoveHealthPlayer();
@@ -61,8 +45,6 @@ public class Enemy : MonoBehaviour
 			gunShot.Play();
 
 			nextFire = Time.time + fireRate;
-
-			//Destroy(tempBulletRig, 3f);
 		}
 
 	}

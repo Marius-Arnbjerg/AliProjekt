@@ -5,38 +5,47 @@ using UnityEngine.InputSystem;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public GameObject bulletPrefab;
-    public GameObject player;
+	public Transform bulletOrigin;
+	public Transform player;
 
-    public Transform bulletOrigin;
+	public ParticleSystem gunShot;
 
-    public float bulletSpeed = 10f;
+	private float nextFire;
+	public float fireRate = 2;
 
-    [SerializeField] private float fireInterval = 2;
+	public LayerMask layers;
+	
+	RaycastHit hit;
 
-    public void ShootPlayer()
-    {
-        GameObject tempBullet = Instantiate(bulletPrefab, bulletOrigin.transform.position, Quaternion.identity);
+	InGameUI IGUI;
 
-        Rigidbody bulletRigidbody = tempBullet.GetComponent<Rigidbody>();
+	void Start()
+	{
+		nextFire = Time.time;
 
-        if (bulletRigidbody != null)
-        {
-            bulletRigidbody.velocity = (player.transform.position - tempBullet.transform.position).normalized * bulletSpeed;
-        }
-    }
+		IGUI = FindObjectOfType<InGameUI>();
+	}
 
+	// Update is called once per frame
+	void Update()
+	{
+		CheckIfTimeToFire();
 
-    private void FixedUpdate()
-    {
-        ShootPlayerWithInterval();
-    }
+		transform.LookAt(player);
+	}
 
-    private IEnumerator ShootPlayerWithInterval()
-    {
-            ShootPlayer();
-            yield return new WaitForSeconds(fireInterval);
-    
-    }
+	void CheckIfTimeToFire()
+	{
+		if (Time.time > nextFire)
+		{
+			if (Physics.Raycast(bulletOrigin.transform.position, bulletOrigin.transform.forward, out hit, 300f, layers))
+			{
+				IGUI.RemoveHealthPlayer();
+			}
 
+			gunShot.Play();
+
+			nextFire = Time.time + fireRate;
+		}
+	}
 }
