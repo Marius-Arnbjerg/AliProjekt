@@ -8,10 +8,13 @@ public class EnemyBehaviour : MonoBehaviour
 	public Transform bulletOrigin;
 	public Transform player;
 
+	private Coroutine LookCoroutine;
+
 	public ParticleSystem gunShot;
 
 	private float nextFire;
 	public float fireRate = 2;
+	public float rotationSpeed = 1;
 
 	public LayerMask layers;
 	
@@ -30,10 +33,29 @@ public class EnemyBehaviour : MonoBehaviour
 	void Update()
 	{
 		CheckIfTimeToFire();
-
-		transform.LookAt(player);
 	}
 
+    private void FixedUpdate()
+    {
+		StartCoroutine(RotateTowardsPlayer());
+	}
+
+
+	private IEnumerator RotateTowardsPlayer()
+    {
+		Quaternion lookRotation = Quaternion.LookRotation(player.position - transform.position);
+
+		float time = 0;
+
+        while (time < 1)
+        {
+			transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, time);
+
+			time += Time.deltaTime * rotationSpeed;
+
+			yield return null;
+        }
+    }
 	void CheckIfTimeToFire()
 	{
 		if (Time.time > nextFire)

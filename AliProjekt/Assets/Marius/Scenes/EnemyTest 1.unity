@@ -3834,6 +3834,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerRevolver
       objectReference: {fileID: 0}
+    - target: {fileID: 8506884091549995006, guid: 8bfc4010443a351439631dba4b69ee6c,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 8817257089852872177, guid: 8bfc4010443a351439631dba4b69ee6c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7798,6 +7803,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 6716613366181560181}
+    - target: {fileID: 7538382028324854029, guid: 55a1c905a51e5ad47a5a73e068b7dcce,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
