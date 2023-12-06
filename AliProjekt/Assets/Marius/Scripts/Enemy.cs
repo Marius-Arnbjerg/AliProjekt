@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	[SerializeField]
-	GameObject bullet;
+	//[SerializeField]
+	//GameObject bullet;
 
-	public float fireRate = 2;
-	public float bulletSpeed = 10;
-	float nextFire;
-	public Transform player;
+	
+	//public float bulletSpeed = 10;
+
+
 	public Transform bulletOrigin;
 	public ParticleSystem gunShot;
+	public Transform player;
+	float nextFire;
+	public float fireRate = 2;
 
 	public LayerMask layers;
 	RaycastHit hit;
@@ -33,6 +36,7 @@ public class Enemy : MonoBehaviour
 	{
 		CheckIfTimeToFire();
 
+
 		transform.LookAt(player);
 	}
 
@@ -48,10 +52,10 @@ public class Enemy : MonoBehaviour
 
 			tempBulletRig.AddForce(tempBulletRig.transform.forward * bulletSpeed);*/
 
-			if (Physics.Raycast(transform.position, transform.forward, out hit, 300f, layers))
+			if (Physics.Raycast(bulletOrigin.transform.position, bulletOrigin.transform.forward, out hit, 300f, layers))
 			{
 				IGUI.RemoveHealthPlayer();
-				Debug.Log("hit!");
+				Debug.Log("hit");
 			}
 
 			gunShot.Play();
