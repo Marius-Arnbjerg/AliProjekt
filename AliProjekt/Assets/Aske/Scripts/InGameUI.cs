@@ -24,6 +24,9 @@ public class InGameUI : MonoBehaviour
 
     public TMP_Text enemyHealthNumberText;
 
+    public Text winHeaderText;
+    public GameObject winMenu;
+    public GameObject gameOverMenu;
     public GameObject pauseMenu;
     private bool pausedGame = false;
 
@@ -34,6 +37,11 @@ public class InGameUI : MonoBehaviour
     public TMP_Text trashCounterText;                     
     public TMP_Text playerOneFuelText, playerTwoFuelText;
     */
+
+    private void Awake()
+    {
+        Time.timeScale = 1;
+    }
 
     public void PauseButtonPressed(InputAction.CallbackContext context)
     {
@@ -59,6 +67,24 @@ public class InGameUI : MonoBehaviour
         }
     }
 
+    public void GameOverMenu()
+    {
+        gameOverMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void WinMenu()
+    {
+        winHeaderText.text = "Level " + SceneManager.GetActiveScene().buildIndex.ToString() + " complete!";
+        winMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
+        
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
+
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -80,8 +106,7 @@ public class InGameUI : MonoBehaviour
 
     public void EmptyPlayerHealth()                                  
     {
-        Debug.Log("player ded");
-        //gameover                                  
+        GameOverMenu();                        
     }
 
     public void Countdown()
@@ -116,21 +141,15 @@ public class InGameUI : MonoBehaviour
         enemyHealthNumberText.text = enemyHealth.ToString();
 
         if (enemyHealth <= 0)
-            EmptyPlayerHealth();
+            EmptyEnemyHealth();
     }
     public void EmptyEnemyHealth()
     {
-        Debug.Log("enemy ded");
-        //game won
+        WinMenu();
     }
     public void RemoveBullet()
     {
         bulletCount = bulletCount - removeHealth;
         bulletNumberText.text = bulletCount.ToString();
-
-        if (bulletCount <= 0)
-        {
-            //empty bullets
-        }
     }
 }
