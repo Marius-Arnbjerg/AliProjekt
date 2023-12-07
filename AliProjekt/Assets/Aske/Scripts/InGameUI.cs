@@ -79,7 +79,7 @@ public class InGameUI : MonoBehaviour
         winMenu.SetActive(true);
         Time.timeScale = 0;
     }
-
+        
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
