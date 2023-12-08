@@ -23,7 +23,7 @@ public class GunBehaviour : MonoBehaviour
 
     public int bulletsLeft = 6;
 
-    private bool gunGrabbed = false;
+    public bool gunGrabbed = false;
     public bool countdownStarted = false;
 
     public LayerMask enemyMask;
