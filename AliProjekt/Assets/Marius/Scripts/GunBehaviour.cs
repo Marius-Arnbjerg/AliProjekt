@@ -5,6 +5,11 @@ using UnityEngine.InputSystem;
 
 public class GunBehaviour : MonoBehaviour
 {
+    public float timeBeforeDraw = 3.0f; // Set the desired duration in seconds
+    public bool readyToShoot = false;
+    public float hitTimer = 0.0f;
+
+
     public AudioClip ShootingAudio;
 
     public InputActionProperty trigger;
@@ -19,22 +24,58 @@ public class GunBehaviour : MonoBehaviour
     public int bulletsLeft = 6;
 
     private bool gunGrabbed = false;
+    public bool countdownStarted = false;
 
-    public LayerMask layers;
+    public LayerMask enemyMask;
+    public LayerMask triggerMask;
 
     RaycastHit hit;
 
     InGameUI IGUI;
+    AreaCollisionCheck areaCollisionCheck;
+
     private void Start()
     {
         IGUI = FindObjectOfType<InGameUI>();
+        areaCollisionCheck = FindObjectOfType<AreaCollisionCheck>();
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        Shoot();
+        HasWaitedOnDraw();
+
+        if (readyToShoot)
+        {
+            Shoot();
+        }        
+    }
+
+    public void HasWaitedOnDraw() 
+    {
+        if (Physics.Raycast(bulletOrigin.transform.position, bulletOrigin.transform.forward, out hit, 300f) && gunGrabbed == true && areaCollisionCheck.stillExited == false)
+        {
+            // Check if the hit object is the target you're interested in
+            if (hit.collider.CompareTag("Trigger"))
+            {             
+                // Increment the timer
+                hitTimer += Time.deltaTime;
+                countdownStarted = true;
+
+                // Check if the timer has exceeded the desired duration
+                if (hitTimer >= timeBeforeDraw)
+                {                    
+                    // Perform actions when the target has been hit for the specified duration
+                    readyToShoot = true;
+                }
+            }
+            else
+            {
+                countdownStarted = false;
+                hitTimer = 0f;
+            }
+        }
     }
 
     public void GunGrabbedTrue()
@@ -54,9 +95,12 @@ public class GunBehaviour : MonoBehaviour
             if (gunGrabbed == true && bulletsLeft > 0)
             {
                 GetComponent<AudioSource>().PlayOneShot(ShootingAudio);
-                if (Physics.Raycast(bulletOrigin.transform.position, bulletOrigin.transform.forward, out hit, 300f, layers))
+                if (Physics.Raycast(bulletOrigin.transform.position, bulletOrigin.transform.forward, out hit, 300f))
                 {
-                    IGUI.RemoveHealthEnemy();
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        IGUI.RemoveHealthEnemy();
+                    }                        
                 }
                 bulletsLeft--;
 
@@ -73,6 +117,7 @@ public class GunBehaviour : MonoBehaviour
     public IEnumerator CoolDownTimer()
     {   
         yield return new WaitForSeconds(coolDownTimer);
+        //reloadSound.Play();
         bulletsLeft = 6;
     }
 }

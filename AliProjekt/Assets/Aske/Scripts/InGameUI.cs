@@ -10,8 +10,12 @@ public class InGameUI : MonoBehaviour
 {
     public int playerHealth = 100;
     public int removeHealth = 1;
-    public float countdownFloat = 60;
+    private float countdownFloat;
+    public float startCountdownFloat = 10;
     public int bulletCount = 6;
+
+    private float drawCountdown;
+
     //public float refillHealth = 25;
     //private float fullHealth = 100;
 
@@ -21,6 +25,7 @@ public class InGameUI : MonoBehaviour
     public TMP_Text countdownText;
     public TMP_Text healthNumberText;
     public TMP_Text bulletNumberText;
+    public TMP_Text drawCountdownText;
 
     public TMP_Text enemyHealthNumberText;
 
@@ -30,6 +35,7 @@ public class InGameUI : MonoBehaviour
     public GameObject pauseMenu;
     private bool pausedGame = false;
 
+    GunBehaviour GB;
     /*
     public Slider playerOneFuelSlider, playerTwoFuelSlider; 
     public Image playerOneFuelIcon, playerTwoFuelIcon;     
@@ -41,6 +47,18 @@ public class InGameUI : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1;
+        GB = FindObjectOfType<GunBehaviour>();
+    }
+
+    private void Start()
+    {
+        countdownFloat = startCountdownFloat;
+        drawCountdown = GB.timeBeforeDraw;
+    }
+
+    private void Update()
+    {
+        TimeBeforeDrawCountdown();
     }
 
     public void PauseButtonPressed(InputAction.CallbackContext context)
@@ -109,7 +127,26 @@ public class InGameUI : MonoBehaviour
         GameOverMenu();                        
     }
 
-    public void Countdown()
+    public void TimeBeforeDrawCountdown()
+    {
+        if(GB.countdownStarted && drawCountdown > 0f && GB.readyToShoot == false)
+        {
+            drawCountdownText.gameObject.SetActive(true);
+            drawCountdown -= Time.deltaTime;
+            drawCountdownText.text = drawCountdown.ToString("F0");
+        }
+        else if(!GB.countdownStarted && GB.readyToShoot == false)
+        {
+            drawCountdown = GB.timeBeforeDraw;
+            drawCountdownText.gameObject.SetActive(false);
+        }
+        else if(GB.readyToShoot == true)
+        {
+            drawCountdownText.gameObject.SetActive(false);
+        }
+    }
+
+    public void OutsideAreaCountdown()
     {
         if (countdownFloat >= 0)
         {
@@ -118,8 +155,7 @@ public class InGameUI : MonoBehaviour
         }
         else
         {
-            Debug.Log("stop");
-            // countdown over action
+            GameOverMenu();
         }
     }
 
@@ -133,7 +169,7 @@ public class InGameUI : MonoBehaviour
     {
         countdownText.gameObject.SetActive(false);
         countdownNumberText.gameObject.SetActive(false);
-        countdownFloat = 60;
+        countdownFloat = startCountdownFloat;
     }
     public void RemoveHealthEnemy()
     {
