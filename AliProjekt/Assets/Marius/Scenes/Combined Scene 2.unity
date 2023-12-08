@@ -31795,12 +31795,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8632c87f157a9a84c8260ccdd8b11eb8, type: 3}
---- !u!1 &884205724 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4562736155387135853, guid: 8632c87f157a9a84c8260ccdd8b11eb8,
-    type: 3}
-  m_PrefabInstance: {fileID: 884205723}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &884915718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46500,24 +46494,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c542fba2beadcb43bc6ef0acdf8ae24, type: 3}
---- !u!1 &1211259074 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6018758693351118093, guid: 4c542fba2beadcb43bc6ef0acdf8ae24,
-    type: 3}
-  m_PrefabInstance: {fileID: 1211259073}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1211259075 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1238443656132478173, guid: 4c542fba2beadcb43bc6ef0acdf8ae24,
-    type: 3}
-  m_PrefabInstance: {fileID: 1211259073}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1215878487
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84369,9 +84345,9 @@ MonoBehaviour:
   healthNumberText: {fileID: 1184812835}
   bulletNumberText: {fileID: 1842999031436065765}
   enemyHealthNumberText: {fileID: 6361780271222257058}
-  winHeaderText: {fileID: 1211259075}
-  winMenu: {fileID: 1211259074}
-  gameOverMenu: {fileID: 884205724}
+  winHeaderText: {fileID: 0}
+  winMenu: {fileID: 0}
+  gameOverMenu: {fileID: 0}
   pauseMenu: {fileID: 1225361264}
 --- !u!114 &1842999031436065765
 MonoBehaviour:

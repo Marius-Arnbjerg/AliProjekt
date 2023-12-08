@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+	public AudioClip ShootingAudio;
+
 	public Transform bulletOrigin;
 	public Transform player;
 
@@ -26,6 +28,7 @@ public class EnemyBehaviour : MonoBehaviour
 	RaycastHit hit;
 
 	InGameUI IGUI;
+	
 
     private void Awake()
     {
@@ -36,6 +39,8 @@ public class EnemyBehaviour : MonoBehaviour
 		gb = FindObjectOfType<GunBehaviour>();
 
 		shootAnimation = GetComponent<Animator>();
+
+
 
 	}
 
@@ -52,12 +57,8 @@ public class EnemyBehaviour : MonoBehaviour
 			shootAnimation.speed = drawSpeed;
 			CheckIfTimeToFire();
 			StartCoroutine(RotateTowardsPlayer());
+			
 		}	
-	}
-
-    private void FixedUpdate()
-    {
-		
 	}
 
 
@@ -82,9 +83,14 @@ public class EnemyBehaviour : MonoBehaviour
 		{
 			if (Time.time > nextFire)
 			{
+				GetComponent<AudioSource>().PlayOneShot(ShootingAudio);
+				
 				if (Physics.Raycast(bulletOrigin.transform.position, bulletOrigin.transform.forward, out hit, 300f, layers))
 				{
 					IGUI.RemoveHealthPlayer();
+					hit.transform.GetComponent<GetHit>().GettingHit();
+					
+				
 				}
 
 				gunShot.Play();

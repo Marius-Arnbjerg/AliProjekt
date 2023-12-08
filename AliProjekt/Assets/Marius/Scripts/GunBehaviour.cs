@@ -5,12 +5,13 @@ using UnityEngine.InputSystem;
 
 public class GunBehaviour : MonoBehaviour
 {
-    public float timeBeforeDraw = 3.0f; // Set the desired duration in seconds
+    public float timeBeforeDraw = 4.0f; // Set the desired duration in seconds
     public bool readyToShoot = false;
     public float hitTimer = 0.0f;
 
 
     public AudioClip ShootingAudio;
+    public AudioClip avSound;
 
     public InputActionProperty trigger;
     public GameObject gun;
@@ -64,7 +65,7 @@ public class GunBehaviour : MonoBehaviour
                 countdownStarted = true;
 
                 // Check if the timer has exceeded the desired duration
-                if (hitTimer >= timeBeforeDraw)
+                if (hitTimer+1 >= timeBeforeDraw)
                 {                    
                     // Perform actions when the target has been hit for the specified duration
                     readyToShoot = true;
@@ -99,6 +100,7 @@ public class GunBehaviour : MonoBehaviour
                 {
                     if (hit.collider.CompareTag("Enemy"))
                     {
+                        GetComponent<AudioSource>().PlayOneShot(avSound);
                         IGUI.RemoveHealthEnemy();
                     }                        
                 }
