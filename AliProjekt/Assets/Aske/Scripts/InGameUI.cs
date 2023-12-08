@@ -139,6 +139,7 @@ public class InGameUI : MonoBehaviour
         }
         else
         {
+            drawCountdown = GB.timeBeforeDraw;
             drawCountdownText.gameObject.SetActive(false);
         }
         /*
