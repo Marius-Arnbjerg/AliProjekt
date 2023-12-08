@@ -50,6 +50,13 @@ public class InGameUI : MonoBehaviour
         Time.timeScale = 1;
         GB = FindObjectOfType<GunBehaviour>();
         AreaColCheck = FindObjectOfType<AreaCollisionCheck>();
+
+        bulletNumberText.text = bulletCount.ToString();
+        enemyHealthNumberText.text = enemyHealth.ToString();
+        countdownText.gameObject.SetActive(false);
+        countdownNumberText.gameObject.SetActive(false);
+        countdownNumberText.text = countdownFloat.ToString("F0");
+        healthNumberText.text = playerHealth.ToString();
     }
 
     private void Start()
@@ -193,7 +200,6 @@ public class InGameUI : MonoBehaviour
     }
     public void RemoveBullet()
     {
-        bulletCount = bulletCount - removeHealth;
-        bulletNumberText.text = bulletCount.ToString();
+        bulletNumberText.text = GB.bulletsLeft.ToString();
     }
 }
