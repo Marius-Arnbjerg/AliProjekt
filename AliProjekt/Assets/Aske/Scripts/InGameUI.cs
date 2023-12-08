@@ -12,7 +12,6 @@ public class InGameUI : MonoBehaviour
     public int removeHealth = 1;
     private float countdownFloat;
     public float startCountdownFloat = 10;
-    public int bulletCount = 6;
 
     private float drawCountdown;
 
@@ -51,7 +50,7 @@ public class InGameUI : MonoBehaviour
         GB = FindObjectOfType<GunBehaviour>();
         AreaColCheck = FindObjectOfType<AreaCollisionCheck>();
 
-        bulletNumberText.text = bulletCount.ToString();
+        bulletNumberText.text = GB.bulletsLeft.ToString();
         enemyHealthNumberText.text = enemyHealth.ToString();
         countdownText.gameObject.SetActive(false);
         countdownNumberText.gameObject.SetActive(false);
