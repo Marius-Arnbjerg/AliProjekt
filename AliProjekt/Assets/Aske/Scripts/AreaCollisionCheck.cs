@@ -11,12 +11,14 @@ public class AreaCollisionCheck : MonoBehaviour
     [Range(0, 50)]
     public int segments = 50;
 
-    private float xradius = 5;
+    public float lineRadius = 1;
 
+    private float xradius = 5;
     private float yradius = 5;
+
     LineRenderer line;
 
-    SphereCollider sphereCollider;
+    BoxCollider sphereCollider;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,10 +26,10 @@ public class AreaCollisionCheck : MonoBehaviour
 
         line = gameObject.GetComponent<LineRenderer>();
 
-        sphereCollider = gameObject.GetComponent<SphereCollider>();
+        sphereCollider = gameObject.GetComponent<BoxCollider>();
 
-        xradius = sphereCollider.radius;
-        yradius = sphereCollider.radius;
+        xradius = lineRadius;
+        yradius = lineRadius;
     }
 
     // Update is called once per frame
@@ -69,7 +71,6 @@ public class AreaCollisionCheck : MonoBehaviour
     {
         float x;
         float y;
-        float z;
 
         float angle = 20f;
 

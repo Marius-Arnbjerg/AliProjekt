@@ -36,6 +36,7 @@ public class InGameUI : MonoBehaviour
     private bool pausedGame = false;
 
     GunBehaviour GB;
+    AreaCollisionCheck AreaColCheck;
     /*
     public Slider playerOneFuelSlider, playerTwoFuelSlider; 
     public Image playerOneFuelIcon, playerTwoFuelIcon;     
@@ -48,6 +49,7 @@ public class InGameUI : MonoBehaviour
     {
         Time.timeScale = 1;
         GB = FindObjectOfType<GunBehaviour>();
+        AreaColCheck = FindObjectOfType<AreaCollisionCheck>();
     }
 
     private void Start()
@@ -129,12 +131,17 @@ public class InGameUI : MonoBehaviour
 
     public void TimeBeforeDrawCountdown()
     {
-        if(GB.countdownStarted && drawCountdown > 0f && GB.readyToShoot == false)
+        if(GB.countdownStarted && drawCountdown > 0f && GB.readyToShoot == false && GB.gunGrabbed && !AreaColCheck.stillExited)
         {
             drawCountdownText.gameObject.SetActive(true);
             drawCountdown -= Time.deltaTime;
             drawCountdownText.text = drawCountdown.ToString("F0");
         }
+        else
+        {
+            drawCountdownText.gameObject.SetActive(false);
+        }
+        /*
         else if(!GB.countdownStarted && GB.readyToShoot == false)
         {
             drawCountdown = GB.timeBeforeDraw;
@@ -143,7 +150,7 @@ public class InGameUI : MonoBehaviour
         else if(GB.readyToShoot == true)
         {
             drawCountdownText.gameObject.SetActive(false);
-        }
+        }*/
     }
 
     public void OutsideAreaCountdown()
