@@ -103,6 +103,7 @@ public class GunBehaviour : MonoBehaviour
                     }                        
                 }
                 bulletsLeft--;
+                IGUI.RemoveBullet();
 
                 gunShotParticles.Play();
 
