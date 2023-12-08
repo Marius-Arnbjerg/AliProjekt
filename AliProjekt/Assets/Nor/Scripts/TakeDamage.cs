@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
+
+//https://www.youtube.com/watch?v=N3JR5m7knGQ
+
 public class TakeDamage : MonoBehaviour
 {
     //intensity of the vignette
@@ -32,7 +35,7 @@ public class TakeDamage : MonoBehaviour
        
     }
 
-    private IEnumerator TakeDamageEffect()
+    public IEnumerator TakeDamageEffect()
     {
         intensisty = 0.4f;
 

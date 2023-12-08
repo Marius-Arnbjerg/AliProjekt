@@ -11,6 +11,7 @@ public class GunBehaviour : MonoBehaviour
 
 
     public AudioClip ShootingAudio;
+    public AudioClip avSound;
 
     public InputActionProperty trigger;
     public GameObject gun;
@@ -99,6 +100,7 @@ public class GunBehaviour : MonoBehaviour
                 {
                     if (hit.collider.CompareTag("Enemy"))
                     {
+                        GetComponent<AudioSource>().PlayOneShot(avSound);
                         IGUI.RemoveHealthEnemy();
                     }                        
                 }
