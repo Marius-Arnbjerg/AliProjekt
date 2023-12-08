@@ -141,7 +141,16 @@ public class InGameUI : MonoBehaviour
         {
             drawCountdownText.gameObject.SetActive(true);
             drawCountdown -= Time.deltaTime;
-            drawCountdownText.text = drawCountdown.ToString("F0");
+
+            if(drawCountdown <= 1f)
+            {
+                //drawCountdownText.text = "GO!";
+            }
+            else
+            {
+                drawCountdownText.text = drawCountdown.ToString("F0");
+            }
+
         }
         else
         {

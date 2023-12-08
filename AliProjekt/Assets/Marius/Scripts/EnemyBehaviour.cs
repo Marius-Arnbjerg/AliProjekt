@@ -55,11 +55,6 @@ public class EnemyBehaviour : MonoBehaviour
 		}	
 	}
 
-    private void FixedUpdate()
-    {
-		
-	}
-
 
 	private IEnumerator RotateTowardsPlayer()
     {
