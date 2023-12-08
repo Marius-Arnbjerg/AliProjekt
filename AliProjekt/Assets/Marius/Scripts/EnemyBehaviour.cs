@@ -8,6 +8,10 @@ public class EnemyBehaviour : MonoBehaviour
 	public Transform bulletOrigin;
 	public Transform player;
 
+	GunBehaviour gb;
+
+	Animator shootAnimation;
+
 	private Coroutine LookCoroutine;
 
 	public ParticleSystem gunShot;
@@ -15,6 +19,7 @@ public class EnemyBehaviour : MonoBehaviour
 	private float nextFire;
 	public float fireRate = 2;
 	public float rotationSpeed = 1;
+	public float drawSpeed = 1f;
 
 	public LayerMask layers;
 	
@@ -22,22 +27,37 @@ public class EnemyBehaviour : MonoBehaviour
 
 	InGameUI IGUI;
 
-	void Start()
-	{
+    private void Awake()
+    {
 		nextFire = Time.time;
 
 		IGUI = FindObjectOfType<InGameUI>();
+
+		gb = FindObjectOfType<GunBehaviour>();
+
+		shootAnimation = GetComponent<Animator>();
+
+	}
+
+    void Start()
+	{
+		shootAnimation.speed = 0;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		CheckIfTimeToFire();
+        if (gb.readyToShoot)
+        {
+			shootAnimation.speed = drawSpeed;
+			CheckIfTimeToFire();
+			StartCoroutine(RotateTowardsPlayer());
+		}	
 	}
 
     private void FixedUpdate()
     {
-		StartCoroutine(RotateTowardsPlayer());
+		
 	}
 
 
@@ -58,16 +78,20 @@ public class EnemyBehaviour : MonoBehaviour
     }
 	void CheckIfTimeToFire()
 	{
-		if (Time.time > nextFire)
+        if (shootAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime > 1) //Shoot first shot when animation is done
 		{
-			if (Physics.Raycast(bulletOrigin.transform.position, bulletOrigin.transform.forward, out hit, 300f, layers))
+			if (Time.time > nextFire)
 			{
-				IGUI.RemoveHealthPlayer();
+				if (Physics.Raycast(bulletOrigin.transform.position, bulletOrigin.transform.forward, out hit, 300f, layers))
+				{
+					IGUI.RemoveHealthPlayer();
+				}
+
+				gunShot.Play();
+
+				nextFire = Time.time + fireRate;
 			}
-
-			gunShot.Play();
-
-			nextFire = Time.time + fireRate;
 		}
+
 	}
 }
