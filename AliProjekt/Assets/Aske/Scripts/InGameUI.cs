@@ -33,6 +33,7 @@ public class InGameUI : MonoBehaviour
     public GameObject gameOverMenu;
     public GameObject pauseMenu;
     private bool pausedGame = false;
+    public bool GameOverEnable = false;
 
     GunBehaviour GB;
     AreaCollisionCheck AreaColCheck;
@@ -56,6 +57,7 @@ public class InGameUI : MonoBehaviour
         countdownNumberText.gameObject.SetActive(false);
         countdownNumberText.text = countdownFloat.ToString("F0");
         healthNumberText.text = playerHealth.ToString();
+        GameOverEnable = false;
     }
 
     private void Start()
@@ -95,15 +97,19 @@ public class InGameUI : MonoBehaviour
 
     public void GameOverMenu()
     {
+        GameOverEnable = true;
         gameOverMenu.SetActive(true);
         Time.timeScale = 0;
     }
 
     public void WinMenu()
     {
-        winHeaderText.text = "Level " + SceneManager.GetActiveScene().buildIndex.ToString() + " complete!";
-        winMenu.SetActive(true);
-        Time.timeScale = 0;
+        if(GameOverEnable == false)
+        {
+            winHeaderText.text = "Level " + SceneManager.GetActiveScene().buildIndex.ToString() + " complete!";
+            winMenu.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
         
     public void NextLevel()

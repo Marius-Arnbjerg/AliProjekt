@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Aske/Scenes/EssentialsScene.unity
-    guid: ebdeac561814ab74a98ffeeedda1482c
+    path: Assets/Marius/Scenes/MainGamePlayScenes/Menu.unity
+    guid: d07031d69eceb4c369b4b00701cf9822
+  - enabled: 1
+    path: Assets/Marius/Scenes/MainGamePlayScenes/Level 1.unity
+    guid: 93ec7e5c1dcc8094b9b58b7a965d225b
+  - enabled: 1
+    path: Assets/Marius/Scenes/MainGamePlayScenes/Level 2.unity
+    guid: 616fdc285128b1d47b545b4ca2ca9ab4
+  - enabled: 1
+    path: Assets/Marius/Scenes/MainGamePlayScenes/Level 3.unity
+    guid: 8bbe2e8cdf9e73c4a949187071d9c7d9
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 39018eff0a9d5405daa73c4f5058e840,
       type: 2}
