@@ -9200,6 +9200,7 @@ MonoBehaviour:
   winMenu: {fileID: 6018758695081758897}
   gameOverMenu: {fileID: 409002003}
   pauseMenu: {fileID: 1464725361}
+  GameOverEnable: 0
 --- !u!4 &1490968345
 Transform:
   m_ObjectHideFlags: 0
@@ -26630,7 +26631,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &5313272571712854112
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -37420,7 +37421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &8136167553518678864
 Animator:
   serializedVersion: 5
