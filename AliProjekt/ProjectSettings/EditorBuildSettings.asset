@@ -6,17 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Marius/Scenes/MainGamePlayScenes/Menu.unity
+    path: Assets/Exam/Scenes/Menu.unity
     guid: d07031d69eceb4c369b4b00701cf9822
   - enabled: 1
-    path: Assets/Marius/Scenes/MainGamePlayScenes/Level 1.unity
-    guid: 93ec7e5c1dcc8094b9b58b7a965d225b
+    path: Assets/Exam/Scenes/ExamLevel1.unity
+    guid: fc3cab73a3144db4f9abbd701864950d
   - enabled: 1
-    path: Assets/Marius/Scenes/MainGamePlayScenes/Level 2.unity
-    guid: 616fdc285128b1d47b545b4ca2ca9ab4
+    path: Assets/Exam/Scenes/ExamLevel2.unity
+    guid: 064ab63468f6c974d98c327790fe63d8
   - enabled: 1
-    path: Assets/Marius/Scenes/MainGamePlayScenes/Level 3.unity
-    guid: 8bbe2e8cdf9e73c4a949187071d9c7d9
+    path: Assets/Exam/Scenes/ExamLevel3.unity
+    guid: 405fb51012f0a5e41b584941b18e8283
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 39018eff0a9d5405daa73c4f5058e840,
       type: 2}

@@ -5,16 +5,14 @@ using UnityEngine.InputSystem;
 
 public class GunBehaviour : MonoBehaviour
 {
-    public float timeBeforeDraw = 4.0f; // Set the desired duration in seconds
+    public float timeBeforeDraw = 3.0f; // Set the desired duration in seconds in THE INSPECTOR
+
     public bool readyToShoot = false;
     public float hitTimer = 0.0f;
 
-
-    public AudioClip ShootingAudio;
-    public AudioClip avSound;
+    //public AudioClip ShootingAudio;
 
     public InputActionProperty trigger;
-    public GameObject gun;
 
     public Transform bulletOrigin;
 
@@ -27,8 +25,6 @@ public class GunBehaviour : MonoBehaviour
     public bool gunGrabbed = false;
     public bool countdownStarted = false;
 
-    public LayerMask enemyMask;
-    public LayerMask triggerMask;
 
     RaycastHit hit;
 
@@ -37,7 +33,7 @@ public class GunBehaviour : MonoBehaviour
 
     private void Start()
     {
-        IGUI = FindObjectOfType<InGameUI>();
+        IGUI = FindObjectOfType<InGameUI>(); //Gains access to the InGameUI script
         areaCollisionCheck = FindObjectOfType<AreaCollisionCheck>();
     }
 
@@ -55,9 +51,10 @@ public class GunBehaviour : MonoBehaviour
 
     public void HasWaitedOnDraw() 
     {
+        //If raycast from gun hits anything within 300f distance, and gun is grabbed, and area is not exited
         if (Physics.Raycast(bulletOrigin.transform.position, bulletOrigin.transform.forward, out hit, 300f) && gunGrabbed == true && areaCollisionCheck.stillExited == false)
         {
-            // Check if the hit object is the target you're interested in
+            // Check if the hit object is the collider on the ground named "Trigger"
             if (hit.collider.CompareTag("Trigger"))
             {             
                 // Increment the timer
@@ -65,7 +62,7 @@ public class GunBehaviour : MonoBehaviour
                 countdownStarted = true;
 
                 // Check if the timer has exceeded the desired duration
-                if (hitTimer+1 >= timeBeforeDraw)
+                if (hitTimer+1 >= timeBeforeDraw) //+1 to match countdown timer from InGameUI
                 {                    
                     // Perform actions when the target has been hit for the specified duration
                     readyToShoot = true;
@@ -74,33 +71,34 @@ public class GunBehaviour : MonoBehaviour
             else
             {
                 countdownStarted = false;
-                hitTimer = 0f;
+                hitTimer = 0f; //Timer reset
             }
         }
     }
 
-    public void GunGrabbedTrue()
+    public void GunGrabbedTrue() //Method assigned to interactable event on gun and runs when gun is grabbed
     {
         gunGrabbed = true;        
     }
 
-    public void GunGrabbedFalse()
+    public void GunGrabbedFalse() //Method assigned to interactable event on gun and runs when gun is ungrabbed
     {
         gunGrabbed = false;
     }
 
     public void Shoot()
     {
-        trigger.action.started += ctx =>
+        trigger.action.started += ctx => //When the trigger button is pressed, run the following
         {
             if (gunGrabbed == true && bulletsLeft > 0)
             {
-                GetComponent<AudioSource>().PlayOneShot(ShootingAudio);
+                GetComponent<AudioSource>().Play(); //PlayOneShot(ShootingAudio);
+
+                //If something is hit within 300f distance
                 if (Physics.Raycast(bulletOrigin.transform.position, bulletOrigin.transform.forward, out hit, 300f))
                 {
-                    if (hit.collider.CompareTag("Enemy"))
+                    if (hit.collider.CompareTag("Enemy")) 
                     {
-                        GetComponent<AudioSource>().PlayOneShot(avSound);
                         IGUI.RemoveHealthEnemy();
                     }                        
                 }
@@ -109,18 +107,21 @@ public class GunBehaviour : MonoBehaviour
 
                 gunShotParticles.Play();
 
-                if(bulletsLeft == 0)
-                {
-                    StartCoroutine(CoolDownTimer());
-                }
+                
             }
-        };            
+            else if (bulletsLeft == 0)
+            {
+                StartCoroutine(CoolDownTimer());
+            }
+        };
     }
 
+   
     public IEnumerator CoolDownTimer()
     {   
+        //Waits x amount of seconds before the following lines are run
         yield return new WaitForSeconds(coolDownTimer);
-        //reloadSound.Play();
+
         bulletsLeft = 6;
         IGUI.RemoveBullet();
     }
